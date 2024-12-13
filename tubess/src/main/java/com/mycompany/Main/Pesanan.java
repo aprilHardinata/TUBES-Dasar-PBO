@@ -26,6 +26,7 @@ public class Pesanan {
     }
     
     public void ubahStatus() {
+        System.out.println("sistem telah berhasil mengubah status");
     }
 }
 
