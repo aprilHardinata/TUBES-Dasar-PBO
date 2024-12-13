@@ -11,6 +11,6 @@ package com.mycompany.Main;
 public class Tubess {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
     }
 }

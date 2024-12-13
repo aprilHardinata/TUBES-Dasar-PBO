@@ -8,8 +8,7 @@ package com.mycompany.Main;
  *
  * @author ASUS
  */
-interface UserActions {
+public interface IUserActions {
     void login(String username, String password);
     void logout();
-    void editProfile();
 }
