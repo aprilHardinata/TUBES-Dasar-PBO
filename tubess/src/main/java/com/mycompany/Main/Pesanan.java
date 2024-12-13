@@ -22,7 +22,7 @@ public class Pesanan {
     }
 
     public void buatPesanan() {
-      
+        System.out.println("sistem telah membuat pesanan");
     }
     
     public void ubahStatus() {
