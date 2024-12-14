@@ -16,7 +16,7 @@ public class Pembeli extends Login implements IUserActions{
     private int no_telp;
     private String email;
 
-    public Pembeli(String alamat, int no_telp, String email, String User_name, String password) {
+    public Pembeli(String User_name, String password, String alamat, int no_telp, String email) {
         super(User_name, password);
         this.alamat = alamat;
         this.no_telp = no_telp;

@@ -11,13 +11,14 @@ package com.mycompany.Main;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Penjual extends Login implements IUserActions{
-    
     private String idUser;
-    ArrayList<Produk> dataProduk = new ArrayList<>();
+    
+   private ArrayList<Produk> dataProduk;
 
-    public Penjual(String idUser, Produk dataProduk, String User_name, String password) {
+    public Penjual(String idUser, String User_name, String password, ArrayList<Produk> dataProduk) {
         super(User_name, password);
         this.idUser = idUser;
+        this.dataProduk = dataProduk;
     }
     
 
@@ -36,31 +37,36 @@ public class Penjual extends Login implements IUserActions{
     }
     
     public void tambahBarang() {
-        Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
-        int idBarang = dataProduk.size() + 1;
+    // Generate ID produk secara otomatis berdasarkan ukuran dataProduk
+    int idBarang = dataProduk.size() + 1;
 
-        System.out.println("Masukkan harga produk: ");
-        int kodeBarang = scanner.nextInt();
+    System.out.print("Masukkan kode barang: ");
+    int kodeBarang = Integer.parseInt(scanner.nextLine()); // Gunakan nextLine() dan parsing untuk menghindari masalah newline
 
-        System.out.println("Masukkan stok produk: ");
-        String namaBarang = scanner.nextLine();
-        
-        System.out.println("Masukkan nama jenis barang: ");
-        String jenisBarang = scanner.nextLine();
+    System.out.print("Masukkan nama barang: ");
+    String namaBarang = scanner.nextLine();
 
-        System.out.println("Masukkan harga harga: ");
-        double hargaBarang = scanner.nextDouble();
+    System.out.print("Masukkan jenis barang: ");
+    String jenisBarang = scanner.nextLine();
 
-        System.out.println("Masukkan harga stok: ");
-        int stok = scanner.nextInt();         
+    System.out.print("Masukkan harga barang: ");
+    double hargaBarang = Double.parseDouble(scanner.nextLine()); // Parsing harga barang
 
-        Produk produkBaru = new Produk(idBarang,kodeBarang,namaBarang,jenisBarang,hargaBarang,stok);
+    System.out.print("Masukkan stok barang: ");
+    int stok = Integer.parseInt(scanner.nextLine()); // Parsing stok barang
 
-        dataProduk.add(produkBaru);
+    // Membuat objek produk baru
+    Produk produkBaru = new Produk(idBarang, kodeBarang, namaBarang, jenisBarang, hargaBarang, stok);
 
-        System.out.println("Produk berhasil ditambahkan!");
-    }
+    // Menambahkan produk baru ke daftar produk
+    dataProduk.add(produkBaru);
+
+    System.out.println("Produk berhasil ditambahkan!");
+}
+
+
     
     public void updateBarang() {
         Scanner scanner = new Scanner(System.in);
