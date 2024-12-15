@@ -41,9 +41,10 @@ public class Pembeli extends Login implements IUserActions{
             System.out.println("Daftar Produk: ");
             for (Produk produk : dataProduk) {
                 System.out.println("ID: " + produk.getId());
-                System.out.println("Nama: " + produk.getNamaBarang());
+                System.out.println("Harga: " + String.format("%.0f", produk.getHargaBarang()));
                 System.out.println("Jenis: " + produk.getJenisBarang());
                 System.out.println("Harga: " + produk.getHargaBarang());
+                System.out.println("Stok: "+ produk.getStok());
                 System.out.println("----------------------------");
             }
         }
@@ -54,7 +55,6 @@ public class Pembeli extends Login implements IUserActions{
         System.out.print("Masukkan ID produk yang ingin dibeli: ");
         int idProduk = scanner.nextInt();
         
-        // Menemukan produk yang dipilih oleh pembeli
         boolean found = false;
         for (Produk produk : dataProduk) {
             if (produk.getId() == idProduk) {

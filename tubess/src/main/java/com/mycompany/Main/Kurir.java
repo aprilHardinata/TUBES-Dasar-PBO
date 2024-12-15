@@ -10,10 +10,16 @@ package com.mycompany.Main;
  */
 public class Kurir extends Login implements IUserActions {
 
-    public Kurir(String User_name, String password) {
+    private String nomorTelephone;
+    public Kurir(String User_name, String password, String nomorTelephone) {
         super(User_name, password);
+        this.nomorTelephone = nomorTelephone;
     }
 
+    public void pilihKurir(){
+       
+    }
+    
     @Override
     public void login(String username, String password) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -23,4 +29,9 @@ public class Kurir extends Login implements IUserActions {
     public void logout() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public String getNomorTelephone() {
+        return nomorTelephone;
+    }
+    
 }

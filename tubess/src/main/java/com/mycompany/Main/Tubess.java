@@ -14,7 +14,7 @@ import java.util.Scanner;
 class menuPembeli{
     public static void menu(){
         System.out.println("-----------------E-commerce-----------------");
-        System.out.println("1. lihat barang sebelum checkout");
+        System.out.println("1. lihat barang");
         System.out.println("2. checkout");
         System.out.print("Masukkan pilihan: ");
     }
@@ -23,8 +23,10 @@ class menuPembeli{
 class menuPenjual{
     public static void menu(){
         System.out.println("-----------------E-commerce-----------------");
-        System.out.println("1. lihat barang sebelum checkout");
-        System.out.println("2. checkout");
+        System.out.println("1. Tampil barang ");
+        System.out.println("2. Tambah barang");
+        System.out.println("3. Edit Barang");
+        System.out.println("4. Hapus Barang");
         System.out.print("Masukkan pilihan: ");
     }
 }
@@ -34,8 +36,14 @@ public class Tubess {
         Scanner scanner = new Scanner(System.in);
 
         ArrayList<Produk> dataProduk = new ArrayList<>();
+        dataProduk.add(new Produk(1, 101, "Laptop", "Elektronik", 15000000, 10));
+        dataProduk.add(new Produk(2, 102, "Smartphone", "Elektronik", 5000000, 20));
         
-        Pembeli pembeli = new Pembeli("Angga", "anggaKetua", "Sukabirus", 1111, "Angga@gmail.com");
+        ArrayList<Kurir> daftarKurir = new ArrayList<>();
+        daftarKurir.add(new Kurir("Kurir1", "password1", "081234567890"));
+        daftarKurir.add(new Kurir("Kurir2", "password2", "089876543210"));
+        
+        Login pembeli = new Pembeli("Angga", "anggaKetua", "Sukabirus", 1111, "Angga@gmail.com");
         Penjual penjual = new Penjual("1001", "admin", "admin", dataProduk);
 
         int pilihan = -1;
@@ -55,8 +63,11 @@ public class Tubess {
                             subPilihan = scanner.nextInt();
 
                             switch (subPilihan) {
-                                case 1 -> pembeli.lihatBarang(dataProduk);
-                                case 2 -> pembeli.checkout(dataProduk);
+                                case 1 -> ((Pembeli)pembeli).lihatBarang(dataProduk);
+                                case 2 -> {
+                                    ((Pembeli)pembeli).checkout(dataProduk);
+                                    
+                                }
                                 case 3 -> System.out.println("Logout sebagai pembeli.");
                                 default -> System.out.println("Pilihan tidak valid.");
                             }
@@ -64,19 +75,22 @@ public class Tubess {
                     }
                     case 2 -> {
                         int pilihanPenjual = -1;
-                        while (pilihanPenjual != 3) { 
+                        while (pilihanPenjual != 5) { 
                             menuPenjual.menu(); 
                             pilihanPenjual = scanner.nextInt();
 
                             switch (pilihanPenjual) {
-                                case 1 -> penjual.tambahBarang(); 
-                                case 2 -> penjual.lihatBarang();
-                                case 3 -> System.out.println("Logout sebagai penjual."); 
+                                case 1 -> penjual.lihatBarang(); 
+                                case 2 -> penjual.tambahBarang();
+                                case 3 -> penjual.updateBarang();
+                                case 4 -> penjual.deleteBarang();
+                                case 5 -> System.out.println("Log out Sebagai penjual.");
                                 default -> System.out.println("Pilihan tidak valid.");
                             }
                         }
                     }
-                    case 3 -> System.out.println("Keluar dari aplikasi."); // Keluar dari aplikasi
+                    
+                    case 3 -> System.out.println("Keluar dari aplikasi.");
                     default -> System.out.println("Pilihan tidak valid.");
                 }
             }
