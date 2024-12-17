@@ -15,7 +15,8 @@ public class Pembeli extends Login implements IUserActions{
     private String alamat;
     private int no_telp;
     private String email;
-
+    private Kurir kurirTerpilih;
+    
     public Pembeli(String User_name, String password, String alamat, int no_telp, String email) {
         super(User_name, password);
         this.alamat = alamat;
@@ -43,41 +44,93 @@ public class Pembeli extends Login implements IUserActions{
                 System.out.println("ID: " + produk.getId());
                 System.out.println("Harga: " + String.format("%.0f", produk.getHargaBarang()));
                 System.out.println("Jenis: " + produk.getJenisBarang());
-                System.out.println("Harga: " + produk.getHargaBarang());
                 System.out.println("Stok: "+ produk.getStok());
                 System.out.println("----------------------------");
             }
         }
     }
-    public void checkout(ArrayList<Produk> dataProduk) {
+    
+    public void checkOut(ArrayList<Produk> daftarProduk, ArrayList<Kurir> daftarKurir) {
         Scanner scanner = new Scanner(System.in);
-        
-        System.out.print("Masukkan ID produk yang ingin dibeli: ");
-        int idProduk = scanner.nextInt();
-        
-        boolean found = false;
-        for (Produk produk : dataProduk) {
-            if (produk.getId() == idProduk) {
-                found = true;
-                
-                System.out.print("Masukkan jumlah yang ingin dibeli: ");
-                int jumlahBeli = scanner.nextInt();
-                
-                // Mengecek apakah stok mencukupi
-                if (produk.getStok() >= jumlahBeli) {
+        lihatBarang(daftarProduk);
+    // 2. Pilih barang untuk checkout
+        ArrayList<Produk> keranjang = new ArrayList<>();
+        while (true) {
+            System.out.println("\nMasukkan nomor barang yang ingin dibeli (atau 0 untuk selesai): ");
+            int pilihan = scanner.nextInt();
+            if (pilihan == 0) break;
 
-                    produk.setStok(produk.getStok() - jumlahBeli);
-                    System.out.println("Berhasil membeli " + jumlahBeli + " " + produk.getNamaBarang());
-                    System.out.println("Sisa stok: " + produk.getStok());
+            if (pilihan > 0 && pilihan <= daftarProduk.size()) {
+                Produk produkDipilih = daftarProduk.get(pilihan - 1);
+
+                // Masukkan ke keranjang dan kurangi stok
+                System.out.println("Berapa banyak yang ingin Anda beli?");
+                int jumlah = scanner.nextInt();
+                if (jumlah <= produkDipilih.getStok() && jumlah > 0) {
+                    produkDipilih.setStok(produkDipilih.getStok() - jumlah);
+                    keranjang.add(new Produk(produkDipilih.getId(), produkDipilih.getKodeBarang(), produkDipilih.getNamaBarang(),
+                                              produkDipilih.getJenisBarang(), produkDipilih.getHargaBarang(), jumlah));
+                    System.out.println("Produk ditambahkan ke keranjang!");
                 } else {
-                    System.out.println("Stok tidak mencukupi untuk jumlah yang diminta.");
+                    System.out.println("Stok tidak mencukupi atau jumlah tidak valid!");
                 }
-                break;
+            } else {
+                System.out.println("Pilihan tidak valid.");
             }
         }
-        
-        if (!found) {
-            System.out.println("Produk dengan ID tersebut tidak ditemukan.");
+
+        // 3. Hitung total harga
+        int totalHarga = 0;
+        for (Produk produk : keranjang) {
+            totalHarga += produk.getHargaBarang()* produk.getStok(); // Di keranjang, "stok" digunakan sebagai jumlah yang dibeli
         }
+
+        // 4. Lanjutkan ke proses checkout
+        System.out.println("\nSistem sedang membuat pesanan...");
+        String idPesanan = "PES" + System.currentTimeMillis();
+        String tglPesanan = "2024-12-17";
+        Pesanan pesanan = new Pesanan(idPesanan, tglPesanan, totalHarga, this.getUser_name());
+        pesanan.buatPesanan();
+
+        // 5. Pilih metode pembayaran
+        System.out.println("\nPilih metode pembayaran:");
+        System.out.println("1. Transfer Bank");
+        System.out.println("2. E-Wallet");
+        System.out.println("3. Cash on Delivery (COD)");
+        int pilihanMetode = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        String metodePembayaran = switch (pilihanMetode) {
+            case 1 -> "Transfer Bank";
+            case 2 -> "E-Wallet";
+            case 3 -> "COD";
+            default -> "COD";
+        };
+        long idPesananNumeric = Long.parseLong(idPesanan.substring(3));
+
+        Pembayaran pembayaran = new Pembayaran(1, idPesananNumeric, metodePembayaran);
+
+        // 6. Pilih kurir
+        System.out.println("\nPilih kurir untuk pengiriman:");
+        for (int i = 0; i < daftarKurir.size(); i++) {
+            Kurir kurir = daftarKurir.get(i);
+            System.out.println((i + 1) + ". Nama Kurir: " + kurir.getUser_name()+
+                               ", Nomor Telepon: " + kurir.getNomorTelephone());
+        }
+        int pilihanKurir = scanner.nextInt();
+        scanner.nextLine();
+        Kurir kurirTerpilih = daftarKurir.get(pilihanKurir - 1);
+
+        // 7. Masukkan alamat pengiriman
+        System.out.println("\nMasukkan alamat pengiriman:");
+        String alamatPengiriman = scanner.nextLine();
+
+        Pengiriman pengiriman = new Pengiriman(1, idPesananNumeric, pilihanKurir, alamatPengiriman.hashCode());
+        System.out.println("Pengiriman telah diinputkan!");
+
+        System.out.println("\n-----------------------Checkout berhasil!-----------------------");
+        System.out.println("ID Pesanan: " + idPesanan);
+        System.out.println("Alamat Pengiriman: " + alamatPengiriman);
+        System.out.println("Kurir: " + kurirTerpilih.getUser_name());
+        System.out.println("Total harga: "+ totalHarga);
     }
 }

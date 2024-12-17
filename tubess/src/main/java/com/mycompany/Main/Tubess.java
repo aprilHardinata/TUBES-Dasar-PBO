@@ -44,7 +44,7 @@ public class Tubess {
         daftarKurir.add(new Kurir("Kurir2", "password2", "089876543210"));
         
         Login pembeli = new Pembeli("Angga", "anggaKetua", "Sukabirus", 1111, "Angga@gmail.com");
-        Penjual penjual = new Penjual("1001", "admin", "admin", dataProduk);
+        Login penjual = new Penjual("1001", "ariff", "ariff555", dataProduk);
 
         int pilihan = -1;
             while (pilihan != 3) {
@@ -64,10 +64,7 @@ public class Tubess {
 
                             switch (subPilihan) {
                                 case 1 -> ((Pembeli)pembeli).lihatBarang(dataProduk);
-                                case 2 -> {
-                                    ((Pembeli)pembeli).checkout(dataProduk);
-                                    
-                                }
+                                case 2 -> ((Pembeli)pembeli).checkOut(dataProduk, daftarKurir);
                                 case 3 -> System.out.println("Logout sebagai pembeli.");
                                 default -> System.out.println("Pilihan tidak valid.");
                             }
@@ -80,10 +77,10 @@ public class Tubess {
                             pilihanPenjual = scanner.nextInt();
 
                             switch (pilihanPenjual) {
-                                case 1 -> penjual.lihatBarang(); 
-                                case 2 -> penjual.tambahBarang();
-                                case 3 -> penjual.updateBarang();
-                                case 4 -> penjual.deleteBarang();
+                                case 1 -> ((Penjual)penjual).lihatBarang(); 
+                                case 2 -> ((Penjual)penjual).tambahBarang();
+                                case 3 -> ((Penjual)penjual).updateBarang();
+                                case 4 -> ((Penjual)penjual).deleteBarang();
                                 case 5 -> System.out.println("Log out Sebagai penjual.");
                                 default -> System.out.println("Pilihan tidak valid.");
                             }

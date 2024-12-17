@@ -10,10 +10,10 @@ package com.mycompany.Main;
  */
 public class Pembayaran {
     int id_pembayaran;
-    int id_pesanan;
+    long id_pesanan;
     String metode_pembayran;
 
-    public Pembayaran(int id_pembayaran, int id_pesanan, String metode_pembayran) {
+    public Pembayaran(int id_pembayaran, long id_pesanan, String metode_pembayran) {
         this.id_pembayaran = id_pembayaran;
         this.id_pesanan = id_pesanan;
         this.metode_pembayran = metode_pembayran;
@@ -23,7 +23,7 @@ public class Pembayaran {
         return id_pembayaran;
     }
 
-    public int getId_pesanan() {
+    public long getId_pesanan() {
         return id_pesanan;
     }
 

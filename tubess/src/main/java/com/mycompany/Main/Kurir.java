@@ -15,10 +15,6 @@ public class Kurir extends Login implements IUserActions {
         super(User_name, password);
         this.nomorTelephone = nomorTelephone;
     }
-
-    public void pilihKurir(){
-       
-    }
     
     @Override
     public void login(String username, String password) {

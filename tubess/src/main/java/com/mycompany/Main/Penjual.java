@@ -11,8 +11,8 @@ package com.mycompany.Main;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Penjual extends Login implements IUserActions{
-    private String idUser;
-    
+   private String idUser;
+   private Kurir kurirTerpilih;
    private ArrayList<Produk> dataProduk;
 
     public Penjual(String idUser, String User_name, String password, ArrayList<Produk> dataProduk) {
@@ -118,6 +118,7 @@ public class Penjual extends Login implements IUserActions{
             System.out.println("Produk tidak ditemukan.");
         }
     }
+    
     
     public void lihatBarang(){
         System.out.println("Daftar Produk: ");

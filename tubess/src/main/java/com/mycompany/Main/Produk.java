@@ -45,6 +45,10 @@ public class Produk {
         return stok;
     }
 
+    public int getKodeBarang() {
+        return kodeBarang;
+    }
+
     public void setIdBarang(int idBarang) {
         this.idBarang = idBarang;
     }

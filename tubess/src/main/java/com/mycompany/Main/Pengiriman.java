@@ -9,12 +9,12 @@ package com.mycompany.Main;
  * @author ASUS
  */
 public class Pengiriman {
-    private int id_pengiriman;
-    private int id_pesanan;
+    private long id_pengiriman;
+    private long id_pesanan;
     private int id_kurir;
     private int alamat_pengiriman;
 
-    public Pengiriman(int id_pengiriman, int id_pesanan, int id_kurir, int alamat_pengiriman) {
+    public Pengiriman(long id_pengiriman, long id_pesanan, int id_kurir, int alamat_pengiriman) {
         this.id_pengiriman = id_pengiriman;
         this.id_pesanan = id_pesanan;
         this.id_kurir = id_kurir;
