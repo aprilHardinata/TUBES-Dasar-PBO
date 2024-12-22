@@ -57,20 +57,46 @@ public class Tubess {
 
                 switch (pilihan) {
                     case 1 -> {
+                    try {
+                        System.out.println("\n=== Login sebagai Pembeli ===");
+                        scanner.nextLine(); 
+                        System.out.print("Masukkan Username: ");
+                        String username = scanner.nextLine();
+
+                        System.out.print("Masukkan Password: ");
+                        String password = scanner.nextLine();
+
+                        pembeli.login(username, password); 
+
                         int subPilihan = -1;
                         while (subPilihan != 3) {
                             menuPembeli.menu();
                             subPilihan = scanner.nextInt();
+                            scanner.nextLine(); 
 
                             switch (subPilihan) {
-                                case 1 -> ((Pembeli)pembeli).lihatBarang(dataProduk);
-                                case 2 -> ((Pembeli)pembeli).checkOut(dataProduk, daftarKurir);
-                                case 3 -> System.out.println("Logout sebagai pembeli.");
+                                case 1 -> ((Pembeli) pembeli).lihatBarang(dataProduk);
+                                case 2 -> ((Pembeli) pembeli).checkOut(dataProduk, daftarKurir);
+                                case 3 -> pembeli.logout();
                                 default -> System.out.println("Pilihan tidak valid.");
                             }
                         }
+                    } catch (SecurityException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
+                }
                     case 2 -> {
+                    try {
+                        System.out.println("\n=== Login sebagai Penjual ===");
+                        scanner.nextLine(); 
+                        System.out.print("Masukkan Username: ");
+                        String username = scanner.nextLine();
+
+                        System.out.print("Masukkan Password: ");
+                        String password = scanner.nextLine();
+
+                        penjual.login(username, password); 
+
                         int pilihanPenjual = -1;
                         while (pilihanPenjual != 5) { 
                             menuPenjual.menu(); 
@@ -85,7 +111,10 @@ public class Tubess {
                                 default -> System.out.println("Pilihan tidak valid.");
                             }
                         }
+                    } catch (SecurityException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
+                }
                     
                     case 3 -> System.out.println("Keluar dari aplikasi.");
                     default -> System.out.println("Pilihan tidak valid.");
@@ -94,4 +123,3 @@ public class Tubess {
 
     }
 }
-

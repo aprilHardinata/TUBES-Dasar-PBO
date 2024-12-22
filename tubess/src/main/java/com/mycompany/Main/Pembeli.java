@@ -24,28 +24,34 @@ public class Pembeli extends Login implements IUserActions{
         this.email = email;
     }
     
-
     @Override
     public void login(String username, String password) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (getUser_name().equals(username) && getPassword().equals(password)) {
+            System.out.println(super.toString());
+        } else {
+            throw new SecurityException("Username atau password salah!");
+        }
     }
 
     @Override
     public void logout() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Logout berhasil sebagai Pembeli: " + getUser_name());
     }
+   
     
     public void lihatBarang(ArrayList<Produk> dataProduk) {
         if (dataProduk.isEmpty()) {
             System.out.println("Tidak ada produk yang tersedia.");
         } else {
+            int nomor = 1;
             System.out.println("Daftar Produk: ");
             for (Produk produk : dataProduk) {
-                System.out.println("ID: " + produk.getId());
+                System.out.println("Nomor: "+nomor);
                 System.out.println("Harga: " + String.format("%.0f", produk.getHargaBarang()));
                 System.out.println("Jenis: " + produk.getJenisBarang());
                 System.out.println("Stok: "+ produk.getStok());
                 System.out.println("----------------------------");
+                nomor++;
             }
         }
     }
@@ -53,7 +59,6 @@ public class Pembeli extends Login implements IUserActions{
     public void checkOut(ArrayList<Produk> daftarProduk, ArrayList<Kurir> daftarKurir) {
         Scanner scanner = new Scanner(System.in);
         lihatBarang(daftarProduk);
-    // 2. Pilih barang untuk checkout
         ArrayList<Produk> keranjang = new ArrayList<>();
         while (true) {
             System.out.println("\nMasukkan nomor barang yang ingin dibeli (atau 0 untuk selesai): ");

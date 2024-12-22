@@ -8,7 +8,7 @@ package com.mycompany.Main;
  *
  * @author ASUS
  */
-public abstract class Login {
+public abstract class Login  implements IUserActions{
     private String User_name;
     private String password;
     
@@ -32,20 +32,24 @@ public abstract class Login {
         this.password = password;
     }
     
-    public void cek(){
-        this.User_name = User_name;
-        this.password = password;
-        
-        if (this.User_name.equals(User_name) && this.password.equals(password)) {
-            System.out.println("Password sudah benar");
+    @Override
+    public void login(String username, String password) {
+        if (this.User_name.equals(username) && this.password.equals(password)) {
+            System.out.println("Login berhasil untuk user: " + username);
         } else {
-            System.out.println("Password salah, silahkan coba lagi");
+            System.out.println("Login gagal. Username atau password salah.");
+            throw new SecurityException("Login gagal");
         }
+    }
+    
+    @Override
+    public void logout() {
+        System.out.println("Logout berhasil untuk user: " + User_name);
     }
 
     @Override
     public String toString() {
-        return User_name + "User Name" + password + "Password" ;
+        return "Login berhasil untuk user: " + User_name;
     }
         
 }

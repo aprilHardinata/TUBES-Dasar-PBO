@@ -28,19 +28,29 @@ public class Penjual extends Login implements IUserActions{
 
     @Override
     public void login(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (getUser_name().equals(username) && getPassword().equals(password)) {
+            System.out.println(super.toString());
+        } else {
+            throw new SecurityException("Username atau password salah!");
+        }
     }
 
     @Override
     public void logout() {
-        
+        System.out.println("Logout berhasil sebagai Pembeli: " + getUser_name());
     }
     
-    public void tambahBarang() {
+   public void tambahBarang() { 
     Scanner scanner = new Scanner(System.in);
 
-    // Generate ID produk secara otomatis berdasarkan ukuran dataProduk
-    int idBarang = dataProduk.size() + 1;
+    // Generate ID produk secara otomatis berdasarkan ID yang belum ada
+    int idBarang = 1; 
+    // Cari ID yang belum digunakan
+    for (Produk p : dataProduk) {
+        if (p.getId() == idBarang) {
+            idBarang++;
+        }
+    }
 
     System.out.print("Masukkan kode barang: ");
     int kodeBarang = Integer.parseInt(scanner.nextLine()); // Gunakan nextLine() dan parsing untuk menghindari masalah newline
@@ -98,26 +108,26 @@ public class Penjual extends Login implements IUserActions{
         }
     }
     
-    public void deleteBarang() {
-        Scanner scanner = new Scanner(System.in);
+public void deleteBarang() {
+    Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Masukkan ID produk yang ingin dihapus: ");
-        int id = scanner.nextInt();
+    System.out.println("Masukkan ID produk yang ingin dihapus: ");
+    int id = scanner.nextInt();
 
-        boolean found = false;
-        for (int i = 0; i < dataProduk.size(); i++) {
-            if (dataProduk.get(i).getId() == id) {
-                dataProduk.remove(i);
-                System.out.println("Produk berhasil dihapus!");
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            System.out.println("Produk tidak ditemukan.");
+    boolean found = false;
+    for (int i = 0; i < dataProduk.size(); i++) {
+        if (dataProduk.get(i).getId() == id) {
+            dataProduk.remove(i);
+            System.out.println("Produk berhasil dihapus!");
+            found = true;
+            break;
         }
     }
+
+    if (!found) {
+        System.out.println("Produk tidak ditemukan.");
+    }
+}
     
     
     public void lihatBarang(){
