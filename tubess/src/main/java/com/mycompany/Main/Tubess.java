@@ -16,6 +16,7 @@ class menuPembeli{
         System.out.println("-----------------E-commerce-----------------");
         System.out.println("1. lihat barang");
         System.out.println("2. checkout");
+        System.out.println("3. Logout");
         System.out.print("Masukkan pilihan: ");
     }
 }
@@ -27,6 +28,7 @@ class menuPenjual{
         System.out.println("2. Tambah barang");
         System.out.println("3. Edit Barang");
         System.out.println("4. Hapus Barang");
+        System.out.println("5. Logout");
         System.out.print("Masukkan pilihan: ");
     }
 }
