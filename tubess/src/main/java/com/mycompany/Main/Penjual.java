@@ -15,8 +15,8 @@ public class Penjual extends Login implements IUserActions{
    private Kurir kurirTerpilih;
    private ArrayList<Produk> dataProduk;
 
-    public Penjual(String idUser, String User_name, String password, ArrayList<Produk> dataProduk) {
-        super(User_name, password);
+    public Penjual(String idUser, String username, String password, ArrayList<Produk> dataProduk) {
+        super(username, password);
         this.idUser = idUser;
         this.dataProduk = dataProduk;
     }
@@ -28,33 +28,33 @@ public class Penjual extends Login implements IUserActions{
 
     @Override
     public void login(String username, String password) {
-        if (getUser_name().equals(username) && getPassword().equals(password)) {
+        if (authenticate(username, password)) {
             System.out.println(super.toString());
         } else {
             throw new SecurityException("Username atau password salah!");
         }
     }
-
+    
     @Override
     public void logout() {
-        System.out.println("Logout berhasil sebagai Pembeli: " + getUser_name());
+        System.out.println("Logout berhasil sebagai Pembeli: " + getUsername());
+    }
+
+    public String getIdUser() {
+        return idUser;
     }
     
-public void tambahBarang() { 
+   public void tambahBarang() { 
     Scanner scanner = new Scanner(System.in);
 
+    // Generate ID produk secara otomatis berdasarkan ID yang belum ada
     int idBarang = 1; 
-    boolean idFound;
-    do {
-        idFound = true;
-        for (Produk p : dataProduk) {
-            if (p.getId() == idBarang) {
-                idBarang++; 
-                idFound = false;
-                break;
-            }
+    // Cari ID yang belum digunakan
+    for (Produk p : dataProduk) {
+        if (p.getId() == idBarang) {
+            idBarang++;
         }
-    } while (!idFound); 
+    }
 
     System.out.print("Masukkan kode barang: ");
     int kodeBarang = Integer.parseInt(scanner.nextLine()); // Gunakan nextLine() dan parsing untuk menghindari masalah newline
@@ -79,7 +79,6 @@ public void tambahBarang() {
 
     System.out.println("Produk berhasil ditambahkan!");
 }
-
 
 
     

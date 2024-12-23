@@ -11,14 +11,14 @@ import java.util.Scanner;
  *
  * @author ASUS
  */
-public class Pembeli extends Login implements IUserActions{
+public class Pembeli extends Login{
     private String alamat;
     private int no_telp;
     private String email;
     private Kurir kurirTerpilih;
-    
-    public Pembeli(String User_name, String password, String alamat, int no_telp, String email) {
-        super(User_name, password);
+
+    public Pembeli(String username, String password, String alamat, int no_telp, String email) {
+        super(username, password);
         this.alamat = alamat;
         this.no_telp = no_telp;
         this.email = email;
@@ -26,7 +26,7 @@ public class Pembeli extends Login implements IUserActions{
     
     @Override
     public void login(String username, String password) {
-        if (getUser_name().equals(username) && getPassword().equals(password)) {
+        if (authenticate(username, password)) {
             System.out.println(super.toString());
         } else {
             throw new SecurityException("Username atau password salah!");
@@ -35,10 +35,21 @@ public class Pembeli extends Login implements IUserActions{
 
     @Override
     public void logout() {
-        System.out.println("Logout berhasil sebagai Pembeli: " + getUser_name());
+        System.out.println("Logout berhasil sebagai Pembeli: " + getUsername());
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public int getNo_telp() {
+        return no_telp;
+    }
+
+    public String getEmail() {
+        return email;
     }
    
-    
     public void lihatBarang(ArrayList<Produk> dataProduk) {
         if (dataProduk.isEmpty()) {
             System.out.println("Tidak ada produk yang tersedia.");
@@ -94,7 +105,7 @@ public class Pembeli extends Login implements IUserActions{
         System.out.println("\nSistem sedang membuat pesanan...");
         String idPesanan = "PES" + System.currentTimeMillis();
         String tglPesanan = "2024-12-17";
-        Pesanan pesanan = new Pesanan(idPesanan, tglPesanan, totalHarga, this.getUser_name());
+        Pesanan pesanan = new Pesanan(idPesanan, tglPesanan, totalHarga, this.getUsername());
         pesanan.buatPesanan();
 
         // 5. Pilih metode pembayaran
@@ -118,7 +129,7 @@ public class Pembeli extends Login implements IUserActions{
         System.out.println("\nPilih kurir untuk pengiriman:");
         for (int i = 0; i < daftarKurir.size(); i++) {
             Kurir kurir = daftarKurir.get(i);
-            System.out.println((i + 1) + ". Nama Kurir: " + kurir.getUser_name()+
+            System.out.println((i + 1) + ". Nama Kurir: " + kurir.getUsername()+
                                ", Nomor Telepon: " + kurir.getNomorTelephone());
         }
         int pilihanKurir = scanner.nextInt();
@@ -135,7 +146,7 @@ public class Pembeli extends Login implements IUserActions{
         System.out.println("\n-----------------------Checkout berhasil!-----------------------");
         System.out.println("ID Pesanan: " + idPesanan);
         System.out.println("Alamat Pengiriman: " + alamatPengiriman);
-        System.out.println("Kurir: " + kurirTerpilih.getUser_name());
+        System.out.println("Kurir: " + kurirTerpilih.getUsername());
         System.out.println("Total harga: "+ totalHarga);
     }
 }

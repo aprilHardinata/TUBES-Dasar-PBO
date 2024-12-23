@@ -8,9 +8,9 @@ package com.mycompany.Main;
  *
  * @author ASUS
  */
-public class Kurir extends Login implements IUserActions {
-
+public class Kurir extends Login{
     private String nomorTelephone;
+    
     public Kurir(String User_name, String password, String nomorTelephone) {
         super(User_name, password);
         this.nomorTelephone = nomorTelephone;
@@ -18,12 +18,16 @@ public class Kurir extends Login implements IUserActions {
     
     @Override
     public void login(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (authenticate(username, password)) {
+            System.out.println(super.toString());
+        } else {
+            throw new SecurityException("Username atau password salah!");
+        }
     }
 
     @Override
     public void logout() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Logout berhasil sebagai Kurir: " + getUsername());
     }
 
     public String getNomorTelephone() {
