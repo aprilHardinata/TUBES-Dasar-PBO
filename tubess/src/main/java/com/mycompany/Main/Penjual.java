@@ -40,17 +40,21 @@ public class Penjual extends Login implements IUserActions{
         System.out.println("Logout berhasil sebagai Pembeli: " + getUser_name());
     }
     
-   public void tambahBarang() { 
+public void tambahBarang() { 
     Scanner scanner = new Scanner(System.in);
 
-    // Generate ID produk secara otomatis berdasarkan ID yang belum ada
     int idBarang = 1; 
-    // Cari ID yang belum digunakan
-    for (Produk p : dataProduk) {
-        if (p.getId() == idBarang) {
-            idBarang++;
+    boolean idFound;
+    do {
+        idFound = true;
+        for (Produk p : dataProduk) {
+            if (p.getId() == idBarang) {
+                idBarang++; 
+                idFound = false;
+                break;
+            }
         }
-    }
+    } while (!idFound); 
 
     System.out.print("Masukkan kode barang: ");
     int kodeBarang = Integer.parseInt(scanner.nextLine()); // Gunakan nextLine() dan parsing untuk menghindari masalah newline
@@ -75,6 +79,7 @@ public class Penjual extends Login implements IUserActions{
 
     System.out.println("Produk berhasil ditambahkan!");
 }
+
 
 
     
