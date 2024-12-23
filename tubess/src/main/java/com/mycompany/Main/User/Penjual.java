@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.Main;
+package com.mycompany.Main.User;
 
 /**
  *
  * @author ASUS
  */
+import com.mycompany.Main.Operasional.IUserActions;
+import com.mycompany.Main.Operasional.Login;
+import com.mycompany.Main.fitur.Produk;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Penjual extends Login implements IUserActions{
@@ -54,7 +57,7 @@ public class Penjual extends Login implements IUserActions{
         idFound = true;
         for (Produk p : dataProduk) {
             if (p.getId() == idBarang) {
-                idBarang++; // Jika ID ditemukan, coba ID berikutnya
+                idBarang++; 
                 idFound = false;
                 break;
             }

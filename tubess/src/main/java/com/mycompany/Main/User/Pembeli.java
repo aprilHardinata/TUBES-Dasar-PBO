@@ -2,8 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.Main;
+package com.mycompany.Main.User;
 
+import com.mycompany.Main.Operasional.Login;
+import com.mycompany.Main.fitur.Pembayaran;
+import com.mycompany.Main.fitur.Pengiriman;
+import com.mycompany.Main.fitur.Pesanan;
+import com.mycompany.Main.fitur.Produk;
 import java.util.ArrayList;
 import java.util.Scanner;
 

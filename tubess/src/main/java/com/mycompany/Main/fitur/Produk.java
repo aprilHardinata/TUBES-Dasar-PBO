@@ -1,4 +1,4 @@
-package com.mycompany.Main;
+package com.mycompany.Main.fitur;
 public class Produk {
     private int idBarang;
     private int kodeBarang;
@@ -17,15 +17,15 @@ public class Produk {
         this.stok = stok;
     }
 
-    void setNama(String namaBaru) {
+    public void setNama(String namaBaru) {
         this.namaBarang = namaBaru;
     }
 
-    void setHarga(double hargaBaru) {
+    public void setHarga(double hargaBaru) {
         this.hargaBarang = hargaBaru;
     }
 
-    int getId() {
+    public int getId() {
         return idBarang;
     }
 
