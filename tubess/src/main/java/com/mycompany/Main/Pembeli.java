@@ -16,6 +16,7 @@ public class Pembeli extends Login{
     private int no_telp;
     private String email;
     private Kurir kurirTerpilih;
+    private Produk produkDipesan;
 
     public Pembeli(String username, String password, String alamat, int no_telp, String email) {
         super(username, password);
@@ -58,6 +59,7 @@ public class Pembeli extends Login{
             System.out.println("Daftar Produk: ");
             for (Produk produk : dataProduk) {
                 System.out.println("Nomor: "+nomor);
+                System.out.println("Nama: "+ produk.getNamaBarang());
                 System.out.println("Harga: " + String.format("%.0f", produk.getHargaBarang()));
                 System.out.println("Jenis: " + produk.getJenisBarang());
                 System.out.println("Stok: "+ produk.getStok());
@@ -145,6 +147,11 @@ public class Pembeli extends Login{
 
         System.out.println("\n-----------------------Checkout berhasil!-----------------------");
         System.out.println("ID Pesanan: " + idPesanan);
+        System.out.println("Barang yang dipesan:");
+        for (Produk produk : keranjang) {
+            System.out.println("- Nama: " + produk.getNamaBarang() + ", Jumlah: " + produk.getStok() + 
+                               ", Harga per unit: " + produk.getHargaBarang());
+        }
         System.out.println("Alamat Pengiriman: " + alamatPengiriman);
         System.out.println("Kurir: " + kurirTerpilih.getUsername());
         System.out.println("Total harga: "+ totalHarga);

@@ -47,14 +47,19 @@ public class Penjual extends Login implements IUserActions{
    public void tambahBarang() { 
     Scanner scanner = new Scanner(System.in);
 
-    // Generate ID produk secara otomatis berdasarkan ID yang belum ada
+    // Cari ID terkecil yang belum terpakai
     int idBarang = 1; 
-    // Cari ID yang belum digunakan
-    for (Produk p : dataProduk) {
-        if (p.getId() == idBarang) {
-            idBarang++;
+    boolean idFound;
+    do {
+        idFound = true;
+        for (Produk p : dataProduk) {
+            if (p.getId() == idBarang) {
+                idBarang++; // Jika ID ditemukan, coba ID berikutnya
+                idFound = false;
+                break;
+            }
         }
-    }
+    } while (!idFound); // Ulangi hingga ID unik ditemukan
 
     System.out.print("Masukkan kode barang: ");
     int kodeBarang = Integer.parseInt(scanner.nextLine()); // Gunakan nextLine() dan parsing untuk menghindari masalah newline
@@ -79,6 +84,7 @@ public class Penjual extends Login implements IUserActions{
 
     System.out.println("Produk berhasil ditambahkan!");
 }
+
 
 
     

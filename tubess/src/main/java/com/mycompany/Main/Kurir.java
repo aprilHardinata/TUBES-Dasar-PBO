@@ -15,6 +15,11 @@ public class Kurir extends Login{
         super(User_name, password);
         this.nomorTelephone = nomorTelephone;
     }
+
+    public Kurir(String username, String password) {
+        super(username, password);
+    }
+    
     
     @Override
     public void login(String username, String password) {

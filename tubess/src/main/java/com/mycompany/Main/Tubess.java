@@ -43,7 +43,8 @@ public class Tubess {
         
         ArrayList<Kurir> daftarKurir = new ArrayList<>();
         daftarKurir.add(new Kurir("Kurir1", "password1", "081234567890"));
-        daftarKurir.add(new Kurir("Kurir2", "password2", "089876543210"));
+        daftarKurir.add(new Kurir("April", "password2", "089876543210"));
+        daftarKurir.add(new Kurir("JNE", "anomali"));
         
         Login pembeli = new Pembeli("Angga", "anggaKetua", "Sukabirus", 1111, "Angga@gmail.com");
         Login penjual = new Penjual("1001", "ariff", "ariff555", dataProduk);
